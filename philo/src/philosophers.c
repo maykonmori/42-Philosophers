@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mjose-ye <mjose-ye@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: mjose-ye <coder@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 10:40:14 by mjose-ye          #+#    #+#             */
-/*   Updated: 2022/04/05 20:51:02 by mjose-ye         ###   ########.fr       */
+/*   Updated: 2022/04/08 22:12:36 by mjose-ye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	main(int argc, char **argv)
 {
-	t_data *data;
+	t_data	*data;
 
 	validate_args(argc, argv);
 	data = (t_data *) malloc (sizeof(t_data));
@@ -23,6 +23,6 @@ int	main(int argc, char **argv)
 	get_values(argv, data);
 	init_list_philo(data);
 	start_threads(data);
+	free_list(data);
 	return (0);
 }
-

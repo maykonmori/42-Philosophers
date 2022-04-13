@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mjose-ye <mjose-ye@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: mjose-ye <coder@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 21:14:33 by mjose-ye          #+#    #+#             */
-/*   Updated: 2022/04/05 20:53:37 by mjose-ye         ###   ########.fr       */
+/*   Updated: 2022/04/08 22:18:05 by mjose-ye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,6 @@
 # include <sys/time.h>
 # include <time.h>
 
-typedef struct s_philo t_philo;
-typedef struct s_data t_data;
-
 typedef struct s_philo
 {
 	int				id;
@@ -30,22 +27,22 @@ typedef struct s_philo
 	int				eat_count;
 	pthread_t		th;
 	pthread_mutex_t	fork;
-	t_philo			*next;
-	t_philo			*prev;
-	t_data			*data;
+	struct s_philo	*next;
+	struct s_philo	*prev;
+	struct s_data	*data;
 }	t_philo;
 
 typedef struct s_data
 {
-	int			philo_num;
-	int			eat;
-	int			sleep;
-	int			die;
-	int			eat_num;
-	long long	start_time;
-	int			dead;
+	int				philo_num;
+	int				eat;
+	int				sleep;
+	int				die;
+	int				eat_num;
+	long long		start_time;
+	int				dead;
 	pthread_mutex_t	printer;
-	t_philo		*philo;
+	t_philo			*philo;
 }	t_data;
 
 void		validate_args(int argc, char **argv);
@@ -63,5 +60,5 @@ void		philo_fork_unlock(t_philo *philo);
 void		philo_eat(t_philo *philo);
 void		philo_sleep(t_philo *philo);
 void		philo_think(t_philo *philo);
-
+void		free_list(t_data *data);
 #endif

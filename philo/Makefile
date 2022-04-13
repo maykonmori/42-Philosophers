@@ -3,14 +3,14 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mjose-ye <mjose-ye@student.42sp.org.br>    +#+  +:+       +#+         #
+#    By: mjose-ye <coder@student.42.fr>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/29 21:11:58 by mjose-ye          #+#    #+#              #
-#    Updated: 2022/04/05 20:55:10 by mjose-ye         ###   ########.fr        #
+#    Updated: 2022/04/08 22:05:11 by mjose-ye         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = philosophers
+NAME = philo
 
 HEADER = philosophers.h
 
@@ -21,7 +21,8 @@ FOLDER = ./src/
 FOLDER_OBJS = ./objs/
 
 SRC =	$(FOLDER)philosophers.c $(FOLDER)validate.c $(FOLDER)utils.c \
-		$(FOLDER)init.c $(FOLDER)func_philo.c $(FOLDER)actions.c
+		$(FOLDER)init.c $(FOLDER)func_philo.c $(FOLDER)actions.c \
+		$(FOLDER)free_list.c
 
 OBJS =	$(patsubst $(FOLDER)%.c, $(FOLDER_OBJS)%.o, $(SRC))
 

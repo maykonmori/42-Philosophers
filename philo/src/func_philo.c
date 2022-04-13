@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   func_philo.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mjose-ye <mjose-ye@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: mjose-ye <coder@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 20:18:31 by mjose-ye          #+#    #+#             */
-/*   Updated: 2022/04/05 20:56:32 by mjose-ye         ###   ########.fr       */
+/*   Updated: 2022/04/08 22:16:45 by mjose-ye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	*func_philo(t_philo *philo)
 
 int	eat_count_check(t_data *data)
 {
-	t_philo *philo;
+	t_philo	*philo;
 
 	philo = data->philo;
 	if (philo->eat_count != data->eat_num)
@@ -50,7 +50,7 @@ void	death_check(t_data *data)
 {
 	t_philo	*philo;
 
-	usleep (data->die - 10);
+	usleep ((data->die * 1000) - 10);
 	philo = data->philo;
 	while (data->dead == 0)
 	{
@@ -58,8 +58,12 @@ void	death_check(t_data *data)
 			break ;
 		if (get_time() - philo->last_eat_time > data->die)
 		{
+			pthread_mutex_lock(&data->printer);
 			printf ("%lli %i died\n", get_time() - data->start_time, philo->id);
 			data->dead = 1;
+			pthread_mutex_unlock(&data->printer);
+			pthread_mutex_destroy(&data->printer);
+			break ;
 		}
 		philo = philo->next;
 	}

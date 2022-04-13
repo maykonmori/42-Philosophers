@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   actions.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mjose-ye <mjose-ye@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: mjose-ye <coder@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 20:46:44 by mjose-ye          #+#    #+#             */
-/*   Updated: 2022/04/05 22:11:04 by mjose-ye         ###   ########.fr       */
+/*   Updated: 2022/04/08 22:15:12 by mjose-ye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ void	philo_fork_lock(t_philo *philo)
 		pthread_mutex_unlock(&philo->data->printer);
 		if (philo->data->philo_num == 1)
 		{
-			usleep(philo->data->die * 1000);
-			return;
+			usleep((philo->data->die * 1000) + 1000);
+			return ;
 		}
 		pthread_mutex_lock(&philo->prev->fork);
 		pthread_mutex_lock(&philo->data->printer);
@@ -48,7 +48,6 @@ void	philo_eat(t_philo *philo)
 	{
 		philo->last_eat_time = get_time();
 		pthread_mutex_lock(&philo->data->printer);
-		// usleep(philo->data->die * 1000);
 		if (philo->data->dead == 0)
 			printf ("%lli %i is eating\n", get_time() \
 					- philo->data->start_time, philo->id);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mjose-ye <mjose-ye@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: mjose-ye <coder@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 17:01:41 by mjose-ye          #+#    #+#             */
-/*   Updated: 2022/04/05 21:52:46 by mjose-ye         ###   ########.fr       */
+/*   Updated: 2022/04/08 23:39:15 by mjose-ye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 long long	get_time(void)
 {
-	struct timeval t;
+	struct timeval	t;
 
 	gettimeofday(&t, NULL);
-	return((t.tv_sec * 1000) + (t.tv_usec / 1000));
+	return ((t.tv_sec * 1000) + (t.tv_usec / 1000));
 }
 
 void	get_values(char **argv, t_data *data)
@@ -30,13 +30,13 @@ void	get_values(char **argv, t_data *data)
 		data->eat_num = ft_atoi(argv[5]);
 	else
 		data->eat_num = -1;
-	data->start_time = get_time();;
+	data->start_time = get_time();
 	data->dead = 0;
 }
 
 void	init_list_philo(t_data *data)
 {
-	int n;
+	int	n;
 
 	n = 1;
 	data->philo = (t_philo *) malloc (sizeof(t_philo));
@@ -46,7 +46,7 @@ void	init_list_philo(t_data *data)
 	data->philo->eat_count = 0;
 	data->philo->next = data->philo;
 	data->philo->prev = data->philo;
-	while(n < data->philo_num)
+	while (n < data->philo_num)
 	{
 		add_to_list(data->philo, data, n);
 		n++;
@@ -56,7 +56,7 @@ void	init_list_philo(t_data *data)
 void	add_to_list(t_philo *philo, t_data *data, int n)
 {
 	t_philo	*new_philo;
-	t_philo *first;
+	t_philo	*first;
 
 	first = philo;
 	new_philo = (t_philo *) malloc (sizeof(t_philo));
@@ -74,8 +74,8 @@ void	add_to_list(t_philo *philo, t_data *data, int n)
 
 void	start_threads(t_data *data)
 {
-	int n;
-	t_philo *temp;
+	int		n;
+	t_philo	*temp;
 
 	n = data->philo_num;
 	temp = data->philo;
@@ -89,11 +89,10 @@ void	start_threads(t_data *data)
 	}
 	death_check(data);
 	n = data->philo_num;
-	while(n > 0)
+	while (n > 0)
 	{
 		pthread_join(temp->th, NULL);
 		temp = temp->next;
 		n--;
 	}
-	pthread_mutex_destroy(&data->printer);
 }
